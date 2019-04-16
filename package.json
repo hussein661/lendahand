@@ -1,0 +1,19 @@
+{
+  "name": "lendahand",
+  "version": "1.0.0",
+  "description": "my personal project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hussein661/lendahand.git"
+  },
+  "author": "husseinh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hussein661/lendahand/issues"
+  },
+  "homepage": "https://github.com/hussein661/lendahand#readme"
+}
