@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2019 at 12:42 PM
+-- Generation Time: Apr 19, 2019 at 04:33 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -90,13 +90,20 @@ CREATE TABLE `users` (
   `first_name` varchar(15) NOT NULL,
   `last_name` varchar(15) NOT NULL,
   `email` varchar(36) NOT NULL,
-  `password` varchar(36) NOT NULL,
+  `password` varchar(60) NOT NULL,
   `mobile` varchar(15) NOT NULL,
   `image` varchar(25) NOT NULL,
   `country_id` int(3) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `image`, `country_id`, `created_at`, `updated_at`) VALUES
+('e9a46fc2-bbec-45bd-92e3-9c804f5f2aa7', 'hussein', 'hussein', 'h.husn99@gmail.com', '$2b$10$V/wlcpkYonvVO97HDeFzTuTPxYuZj.MxPTazsfQOoFFwrkiR8u6Ym', '70232661', '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -109,6 +116,46 @@ CREATE TABLE `user_roles` (
   `role_id` varchar(36) NOT NULL,
   `user_id` varchar(36) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `donation`
+--
+ALTER TABLE `donation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `problems`
+--
+ALTER TABLE `problems`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `problems_images`
+--
+ALTER TABLE `problems_images`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_roles`
+--
+ALTER TABLE `user_roles`
+  ADD PRIMARY KEY (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
