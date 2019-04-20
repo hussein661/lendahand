@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class Home extends Component {
+class FeedBack extends Component {
     render() {
         return (
             <div>
-                heyy
+                FEED BACK
             </div>
         );
     }
 }
 
-export default Home;
+export default FeedBack;
