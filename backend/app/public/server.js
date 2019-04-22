@@ -9,7 +9,6 @@
   const  { Model } = require('objection');
   const knex = require('knex')(require('../config/database').knex);
   const logger = require('knex-logger');
-  const User = require("../models/User")
   const userController = require('../controllers/users')
   // ports, app initialization
   const PORT = process.env.PORT || 5000;

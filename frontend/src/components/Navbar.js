@@ -97,6 +97,11 @@ class PrimarySearchAppBar extends React.Component {
         mobileMoreAnchorEl: null,
         loggedIn :false
     };
+
+
+  componentDidMount(){
+    //check if there is a logged in user
+  }
     
   handleProfileMenuOpen = event => {
     this.setState({ anchorEl: event.currentTarget });

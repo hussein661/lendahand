@@ -10,6 +10,7 @@ class Register extends Component {
     input[e.target.name] = e.target.value;
     this.setState(input);
   };
+
   createAccount = e => {
     e.preventDefault()
     const  {first_name,last_name,email,password} = this.state
@@ -19,8 +20,9 @@ class Register extends Component {
     .then(result => {
       if(result.response){
         return console.log(result.response.data)
+        
       }
-      return console.log(result.data)
+      return this.props.history.push("/login")
     })
 
   };
