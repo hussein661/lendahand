@@ -7,7 +7,7 @@ const uuid = require("uuid");
 const HashUtil = require("../utils/hashutil");
 
 module.exports = {
-  getAllUsers: router.get("/users/getall", async (req, res) => {
+  getAllUsers: router.get("/api/v1/users/getall", async (req, res) => {
     try {
       const users = await User.query().select();
       return res.status(200).json({ users });
@@ -16,7 +16,7 @@ module.exports = {
     }
   }),
   
-  Register: router.post("/register", async (req, res) => {
+  Register: router.post("/api/v1/register", async (req, res) => {
     try {
 
       const { first_name,last_name, email, password, mobile,image,country_id } = req.body;
@@ -34,6 +34,8 @@ module.exports = {
         country_id
       };
 
+    
+
       if (
      await User.query()
           .select()
@@ -49,7 +51,7 @@ module.exports = {
     }
   }),
 
-  login: router.post("/login", async (req, res) => {
+  login: router.post("/api/v1/login", async (req, res) => {
     try {
       let { email, password } = req.body;
       const user = await User.query()
