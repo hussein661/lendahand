@@ -43,3 +43,4 @@
   console.log('server is running on port '+ PORT)
 
   app.use(userController.getAllUsers)
+

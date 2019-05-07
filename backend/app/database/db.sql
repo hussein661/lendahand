@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2019 at 04:33 PM
+-- Generation Time: May 07, 2019 at 01:37 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -103,7 +103,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `image`, `country_id`, `created_at`, `updated_at`) VALUES
-('e9a46fc2-bbec-45bd-92e3-9c804f5f2aa7', 'hussein', 'hussein', 'h.husn99@gmail.com', '$2b$10$V/wlcpkYonvVO97HDeFzTuTPxYuZj.MxPTazsfQOoFFwrkiR8u6Ym', '70232661', '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+('3f630a5c-a0e0-4706-b46a-242a394396f3', 'hussein', 'hussein', 'uxmx123@gmail.com', '$2b$10$zpb5McwW5fyYU7VW0MhZb.MXQQi0PYWUEw83IfeyU5JlM/Riu62Y2', '', '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+('4017e22a-f3bf-4763-aa66-fec13bc573f8', 'adam ', 'eltrin', 'adameltien@gotmailc.ckm', '$2b$10$XjFu.h3xxMAKni5./DwbFuAet5nPPfe91vYrZ1zj5KKgOThREKiAO', '70232661', 'image', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+('4b2b18b0-19ee-464b-9adc-ccfd9fdbbdb4', 'adsadsad', 'dsad', 'hussein.huqssein@montyholding.com', '$2b$10$H.2usdJaixMmvQpO.RZPT.fZcfHC5eBVRiIDwPyT.LauQmM1jOzGW', '70232661', 'image', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+('a5868f26-12a9-44dc-b9e1-191b2e1bc662', 'adsadsad', 'dsad', 'admin1@gmail.com', '$2b$10$Q/TfqyWdgTjS/aeIPYAkbO9wZrW2653ZcmMzieTRDlp4Z2eplmTcG', '', '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+('b0153067-bc59-4ee8-adef-3d498915aee2', 'adam ', 'eltrin', 'adamsseltien@gotmailc.ckm', '$2b$10$n1AMC36o0ZIkAYMjVNbYsu6dtDK.bf3ipHCpqgwTzioXhaVpMdyN.', '', '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+('e9a46fc2-bbec-45bd-92e3-9c804f5f2aa7', 'hussein', 'hussein', 'h.husn99@gmail.com', '$2b$10$V/wlcpkYonvVO97HDeFzTuTPxYuZj.MxPTazsfQOoFFwrkiR8u6Ym', '70232661', '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+('f157f219-eda9-4df6-adf1-0611be7da432', 'adsadsad', 'dsad', 'hussein.hussein@montyholding.com', '$2b$10$nbFibgQzUKjY1PFKsM5JhO8ZcNS3lilAEa6wACyuVRLDFqyggden.', '', '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
