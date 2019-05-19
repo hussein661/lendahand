@@ -9,6 +9,7 @@
     "bootstrap": "^4.3.1",
     "filepond": "^4.4.6",
     "filepond-plugin-image-preview": "^4.1.1",
+    "jquery": "^3.4.1",
     "material-ui": "^0.20.2",
     "material-ui-dropzone": "^2.3.5",
     "mdbreact": "^4.13.0",

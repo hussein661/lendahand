@@ -14,6 +14,11 @@ export default  function checkResponse (url,method,data){
     }
     ).catch(error =>{console.info(error.response)
         if(error.response.status == 401){
+            if(error.response.data.error.name == "TokenExpiredError"){
+                alert("session expired")
+                localStorage.clear()
+                return
+            }
            return error
         }
         if(error.response.status == 400){

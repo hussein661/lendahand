@@ -45,5 +45,46 @@ module.exports = {
       res.status(422).json({error:e.message})
     }
   }),
+
+  deletePost:router.delete("/api/v1/problems/delete/:postId",authorization(),async (req,res)=>{
+     const user_id = getID(req)
+      try{
+        const problem = await Problem.query().select().where("id",req.params.postId).first()
+        if(!problem){
+          return res.status(401).json({error:" post not found"})
+        }
+        if(problem.user_id !== user_id){
+          return res.status(401).json({error:"unauthorized access"})
+        }
+        const deleted = await Problem.query().where("id",req.params.postId).delete()
+        if(deleted != 0 ){
+         return res.status(200).json({message:"post successfully deleted "})
+        }
+        return res.status(401).json({error:"unknown error"})
+        }catch(e){
+        res.status(422).json({error:e.message})
+      }
+  }),
+
+  editPost:router.put("/api/v1/problems/edit/:postId",authorization(),async (req,res)=>{
+    const user_id = getID(req)
+    const data = {...req.body}
+     try{
+       const problem = await Problem.query().select().where("id",req.params.postId).first()
+       if(!problem){
+         return res.status(401).json({error:"post not found"})
+       }
+       if(problem.user_id !== user_id){
+         return res.status(401).json({error:"unauthorized access"})
+       }
+       const updated = await Problem.query().where("id",req.params.postId).update(data)
+       if(updated != 0 ){
+        return res.status(200).json({message:"post successfully deleted "})
+       }
+       return res.status(401).json({error:"unknown error"})
+       }catch(e){
+       res.status(422).json({error:e.message})
+     }
+ })
   
 };
