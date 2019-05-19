@@ -5,6 +5,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const uuid = require("uuid");
 const HashUtil = require("../utils/hashutil");
+const authenticate = require("../middlewares/authentications")
+const getID = require("../utils/getUserId")
 
 module.exports = {
   getAllUsers: router.get("/api/v1/users/getall", async (req, res) => {
@@ -13,6 +15,18 @@ module.exports = {
       return res.status(200).json({ users });
     } catch (e) {
       res.status(422).json({ error: e.message });
+    }
+  }),
+
+  getone:router.get("/api/v1/users/getone",authenticate(),async(req,res,next)=>{
+    try{
+      const user_id = getID(req)
+      const user = await User.query().select().where("id",user_id).first()
+      if(user){
+       return res.status(200).json({user})
+      }
+    }catch(e){
+      return res.status(422).json({error:e.message})
     }
   }),
   
@@ -33,8 +47,6 @@ module.exports = {
         image,
         country_id
       };
-
-    
 
       if (
      await User.query()
@@ -62,7 +74,7 @@ module.exports = {
         const crypt = new HashUtil(password, user.password);
         if (crypt.verify()) {
           var token = jwt.sign({email,id:user.id}, "process.env.ACCESS_KEY", { algorithm: 'HS256', expiresIn: 6000})
-          return res.status(200).json({token});
+          return res.status(200).json({token,user_id:user.id});
         }
       }
       return res.status(400).json({ error: "incorrect email or password" });

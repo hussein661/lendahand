@@ -10,6 +10,7 @@
   const knex = require('knex')(require('../config/database').knex);
   const logger = require('knex-logger');
   const userController = require('../controllers/users')
+  const problemController = require('../controllers/problems')
   // ports, app initialization
   const PORT = process.env.PORT || 5000;
   const app = express();
@@ -43,4 +44,5 @@
   console.log('server is running on port '+ PORT)
 
   app.use(userController.getAllUsers)
+  app.use(problemController.postProblem)
 

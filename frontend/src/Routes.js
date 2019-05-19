@@ -8,29 +8,38 @@ import Profile from "./pages/Profile";
 import LogIn from "./pages/LogIn";
 import Register from "./pages/Register";
 
+const isLoggedIn = () => {
+  const token = localStorage.getItem("API_TOKEN")
+  if(token !== null && token.length > 10){
+    return true
+  }
+}
 
-const MyRoute = ({ component: Component}) => {
+const MyRoute = ({ path ,component: Component,publicRoute}) => {
   return (
       <div>
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn}/>
+      {(isLoggedIn() || publicRoute) ? 
       <Route  render={props => <Component {...props} />} />
+      :
+      <Route  render={props => <LogIn {...props} />} />
+    }
       </div>
   );
 };
+
+
 
 const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <MyRoute exact path="/" component={Home} />
+        <MyRoute exact path="/" component={Home} publicRoute />
         <MyRoute exact path="/postAProblem" component={PostAProblem} />
         <MyRoute exact path="/feedBack" component={FeedBack} />
         <MyRoute exact path="/profile" component={Profile} />
-        <MyRoute exact path="/LogIn" component={LogIn} />
-        <MyRoute exact path="/Register" component={Register} />
-
-
-
+        <MyRoute exact path="/LogIn" component={LogIn} publicRoute/>
+        <MyRoute exact path="/Register" component={Register} publicRoute />
 
       </Switch>
     </BrowserRouter>

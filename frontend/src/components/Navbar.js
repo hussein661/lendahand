@@ -95,7 +95,6 @@ class PrimarySearchAppBar extends React.Component {
     state = {
         anchorEl: null,
         mobileMoreAnchorEl: null,
-        loggedIn :false
     };
 
 
@@ -113,13 +112,13 @@ class PrimarySearchAppBar extends React.Component {
   };
 
   goToProfile = ()=>{
-      this.setState({loggedIn:true})
       this.props.history.push("/profile")
       this.handleMenuClose()
   }
   SignOut = () =>{
-      this.setState({loggedIn:false})
+      localStorage.clear()
       this.handleMenuClose()
+      this.props.history.push("login")
   }
 
   handleMobileMenuOpen = event => {
@@ -130,9 +129,9 @@ class PrimarySearchAppBar extends React.Component {
     this.setState({ mobileMoreAnchorEl: null });
   };
 
-  loggedIn = ()=>{
-      this.setState({loggedIn:true})
-      this.props.history.push("/")
+  logIn= ()=>{
+     const URL = 
+      this.props.history.push("/login")
   }
 
   render() {
@@ -200,10 +199,10 @@ class PrimarySearchAppBar extends React.Component {
             </Typography>
             <Tabs style={styles.tabs}>
           <Tab label='Home' onClick={_=>this.props.history.push('/')}/>
-          <Tab label='Post A Problem' onClick={_=>this.props.history.push('/postAProblem')} />
-          <Tab label='Feed Back' onClick={_=>this.props.history.push('/feedBack')}/>
+          <Tab label='Post A Problem' onClick={_=>this.props.history.push('/postAProblem')} hidden={!this.props.isLoggedIn()} />
+          <Tab label='Feed Back' onClick={_=>this.props.history.push('/feedBack')} hidden={!this.props.isLoggedIn()}/>
         </Tabs>    
-                <div className={classes.search}>
+                {/* <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
@@ -214,9 +213,9 @@ class PrimarySearchAppBar extends React.Component {
                   input: classes.inputInput,
                 }}
               />
-            </div>
+            </div> */}
             <div className={classes.grow} />
-            {this.state.loggedIn ? 
+            {this.props.isLoggedIn() ? 
             <div className={classes.sectionDesktop}>
               <IconButton color="inherit">
                 <Badge badgeContent={4} color="secondary">
@@ -239,7 +238,7 @@ class PrimarySearchAppBar extends React.Component {
             </div>
               :
               <Tabs style={styles.tabs}>
-              <Tab label='Log In' onClick={this.loggedIn}/>
+              <Tab label='Log In' onClick={this.logIn}/>
               <Tab label='Register' onClick={_=>this.props.history.push('/Register')}/>
 
             </Tabs> 

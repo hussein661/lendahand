@@ -24,6 +24,9 @@ class LogIn extends Component {
         return console.log(result.response.data)
         
       }
+      // console.log(result)
+      localStorage.setItem("API_TOKEN",result.data.token)
+      localStorage.setItem("user_id",result.data.user_id)
       return this.props.history.push("/")
     })
 

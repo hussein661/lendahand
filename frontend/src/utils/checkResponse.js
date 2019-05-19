@@ -1,5 +1,9 @@
 import Axios from 'axios'
 
+const API_TOKEN = localStorage.getItem("API_TOKEN");
+Axios.defaults.headers.common["Authorization"] = API_TOKEN;
+// Axios.defaults.headers.common["Content-Type"] = 'application/json'
+
 export default  function checkResponse (url,method,data){
     return Axios({
         url,
