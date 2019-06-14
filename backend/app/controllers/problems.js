@@ -17,7 +17,7 @@ module.exports = {
           id:uuid(),
           title:req.body.title,
           description:req.body.description,
-          amount:req.body.amount,
+          needed_amount:req.body.needed_amount,
           aquired:1,
           user_id:req.body.user_id
       }
@@ -68,7 +68,8 @@ module.exports = {
 
   editPost:router.put("/api/v1/problems/edit/:postId",authorization(),async (req,res)=>{
     const user_id = getID(req)
-    const data = {...req.body}
+    const title = req.body.title
+    const id = req.params.postId
      try{
        const problem = await Problem.query().select().where("id",req.params.postId).first()
        if(!problem){
@@ -77,9 +78,9 @@ module.exports = {
        if(problem.user_id !== user_id){
          return res.status(401).json({error:"unauthorized access"})
        }
-       const updated = await Problem.query().where("id",req.params.postId).update(data)
+       const updated = await Problem.query().where("id",id).update({title})
        if(updated != 0 ){
-        return res.status(200).json({message:"post successfully deleted "})
+        return res.status(200).json({message:"post successfully updated"})
        }
        return res.status(401).json({error:"unknown error"})
        }catch(e){
