@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import {DropzoneArea} from 'material-ui-dropzone'
 import {API_PREFIX,PUBLIC_URL} from '../utils/Dirs'
 import checkRespone from '../utils/checkResponse'
+import { Button } from '../components/common';
+import Header from '../components/common/Header';
 
 const styles = theme => ({
   container: {
@@ -55,13 +53,17 @@ class PostAProblem extends Component {
    e.preventDefault()
    const data = {
      title:this.state.title,
-     amount:this.state.amount,
+     needed_amount:this.state.amount,
      description:this.state.description,
      user_id:localStorage.getItem("user_id")
    }
     const URL = PUBLIC_URL + API_PREFIX + "problems/post"
     checkRespone(URL,"post",data).then(r=>{
-      alert("post created by " + data.user_id)
+      if(r.data){
+        alert("post created by " + data.user_id)
+      }if(r.response){
+        console.log(r.response.data)
+      }
     })
     
  }
@@ -73,8 +75,8 @@ class PostAProblem extends Component {
     const { classes } = this.props;
       return (
         <form  noValidate autoComplete="off" style={{background:"rgba(255,255,255,0.5)"}} onSubmit={this.postProblem}>
-          <h1 style={{textAlign:"center"}}>please specify your problem</h1>
-          <div style={{textAlign:"center"}}>
+          <div className="formContainer" style={{width:600}}>
+          <Header>Post your problem </Header>
 
           <TextField
             label="Title"            
@@ -123,7 +125,7 @@ class PostAProblem extends Component {
         filesLimit={5}
         />
         <br/>
-        <Button variant="contained" color="primary" type="submit">
+        <Button type="submit">
         Post your problem
       </Button>
             </div>

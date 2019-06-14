@@ -237,8 +237,8 @@ class PrimarySearchAppBar extends React.Component {
               </IconButton>
             </div>
               :
-              <Tabs style={styles.tabs}>
-              <Tab label='Log In' onClick={this.logIn}/>
+              <Tabs>
+              <Tab style={{color:"red"}} label='Log In' onClick={this.logIn}/>
               <Tab label='Register' onClick={_=>this.props.history.push('/Register')}/>
 
             </Tabs> 

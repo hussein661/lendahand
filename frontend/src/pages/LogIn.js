@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import {PUBLIC_URL,API_PREFIX} from '../utils/Dirs'
 import checkResponse from '../utils/checkResponse'
+import TextField from '@material-ui/core/TextField';
+import { Button,Link} from '../components/common';
+import Header from '../components/common/Header';
 
 class LogIn extends Component {
 
@@ -13,70 +16,85 @@ class LogIn extends Component {
     this.setState(input);
   };
 
+  validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
   LogIn = e => {
     e.preventDefault()
     const  {email,password} = this.state
+    if(!email){
+      return this.setState({err:"please insert your email",emailError:true,passwordError:false})
+    }
+      if(!this.validateEmail(email)){
+        return this.setState({err:"please insert a valid email address",emailError:true,passwordError:false})
+      }
+      if(!password){
+        return this.setState({err:"please insert your password",emailError:false,passwordError:true})
+      }
+      if(password.length  < 6){
+        return this.setState({err:"password is too short",emailError:false,passwordError:true})
+      }
+    
     const URL = PUBLIC_URL + API_PREFIX + "login"
     console.log(URL)
     checkResponse(URL,"post",{email,password})
     .then(result => {
       if(result.response){
-        return console.log(result.response.data)
-        
+       return this.setState({err:result.response.data.error,emailError:true,passwordError:true})
       }
       // console.log(result)
       localStorage.setItem("API_TOKEN",result.data.token)
       localStorage.setItem("user_id",result.data.user_id)
-      return this.props.history.push("/")
+      return this.props.history.push("/profile")
     })
 
   };
 
+  err = ()=>{
+    if(this.state.err){
+      return <h5 style={{color:"red"}}>{this.state.err}</h5>
 
+    }
+  }
     render() {
         return (
-<div className="limiter">
-  <div className="container-login100">
-    <div className="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-      <form className="login100-form validate-form" onSubmit={this.LogIn}>
-        <span className="login100-form-title p-b-33">
-          Account Login
-        </span>
-        <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-          <input className="input100" type="text" name="email" placeholder="Email" onChange={e=>this.handleChange(e)}/>
-          <span className="focus-input100-1" />
-          <span className="focus-input100-2" />
-        </div>
-        <div className="wrap-input100 rs1 validate-input" data-validate="Password is required">
-          <input className="input100" type="password" name="password" placeholder="Password"  onChange={e=>this.handleChange(e)}/>
-          <span className="focus-input100-1" />
-          <span className="focus-input100-2" />
-        </div>
-        <div className="container-login100-form-btn m-t-20">
-          <button className="login100-form-btn" type="submit">
-            Sign in
-          </button>
-        </div>
-        <div className="text-center p-t-45 p-b-4">
-          <span className="txt1">
-            Forgot
-          </span>
-          <a href="#" className="txt2 hov1">
-            Username / Password?
-          </a>
-        </div>
-        <div className="text-center">
-          <span className="txt1">
-            Create an account?
-          </span>
-          <a href="/register" className="txt2 hov1">
-            Sign up
-          </a>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+          <div className="formContainer">
+          <form onSubmit={this.LogIn}>
+            {this.err()}
+            <Header>
+              Login
+            </Header>
+          <TextField
+          className="textField"
+          label="email"
+          onChange={e=>this.handleChange(e)}
+          error={this.state.emailError}
+          placeholder="example@example.com"
+          margin="dense"
+          name="email"
+          variant="outlined"
+          />
+        <TextField
+        className="textField"
+          required
+          error={this.state.passwordError}
+          name="password"
+          onChange={e=>this.handleChange(e)}
+          type="password"
+          label="password"
+          margin="dense"
+          variant="outlined"
+          />
+          <Link onClick={_=>this.props.history.push('/register')}>
+            Don't have an account ?
+          </Link>
+          <Button type="submit">
+            Login
+          </Button>
+          </form>
+          </div>
 
         );
     }

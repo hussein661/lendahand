@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import {API_PREFIX,PUBLIC_URL} from '../utils/Dirs'
 import checkRespone from '../utils/checkResponse'
 import $ from "jquery"
+import { Button, Link } from '../components/common';
+import Header from '../components/common/Header';
+import PostCard from '../components/PostCard';
 
 
 
@@ -48,7 +51,6 @@ class Profile extends Component {
     deletePost = id =>{
 
         const URL = PUBLIC_URL + API_PREFIX + "problems/delete/" + id
-        console.log(URL)
         checkRespone(URL,"delete").then(r=>{
             if(r.data.message){
                 var  myPosts = [...this.state.myPosts]
@@ -94,28 +96,45 @@ class Profile extends Component {
     editmode = (post) =>{
         return (
             <div>
-        <input type="text" defaultValue={post.title} onBlur={this.save}/>
+        <input type="text" defaultValue={post.title} onBlur={e=>this.save(e,post)}/>
             </div>
         )
+    }
+
+    save = (e,post) => {
+        const postid = post.id
+        const URL = PUBLIC_URL +  API_PREFIX  + "problems/edit/" + postid
+        const title = e.target.value
+        checkRespone(URL,"put",{title}).then(
+            r=>{
+                 this.changeEditMode()
+                if(r.data){
+                    const myPosts = [...this.state.myPosts]
+                    myPosts.map(pos =>{
+                        if(pos.id == postid){ 
+                            pos.title = title
+                        }
+                    this.setState({myPosts})
+                    })
+                  return  console.log(r.data)
+                }
+                return console.log(r.response.data)
+            }
+         )
     }
 
 
     render() {
         return (
             <div>
-              <h1 style={{textAlign:"center"}}>welcome {this.state.user.first_name}</h1>
-              <br/>
-                <h1>my posts</h1>
-                {this.state.myPosts.map(post=>(
-                    <div>
-                   <div>
-                       {!this.state.editmode ? this.viewMode(post) : this.editmode(post)}
-                   </div>
-                   <h2>{post.title + " | " + post.amount + " | " + post.description}</h2>
-                   {/* <button className="btn btn-secondary" onClick={e=>this.editing(e)}>edit</button> */}
-                   <button className="btn btn-danger" onClick={_=>this.deletePost(post.id)}>deletePost</button>
-                    </div>
-                ))}
+              <Header>
+                  welcome {this.state.user.first_name}
+                  </Header> 
+                      {this.state.myPosts.map(post=>
+                  <div className="formContainer">
+                        <PostCard post={post} deletePost={this.deletePost} history={this.props.history}/>
+                  </div>
+                        )}
             </div>
         );
     }
