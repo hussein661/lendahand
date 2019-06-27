@@ -11,6 +11,18 @@ const getID = require("../utils/getUserId")
 
 
 module.exports = {
+
+  getProblem: router.get("/api/v1/problem/:problemId", async (req, res) => {
+    try {
+      const problemId = req.params.problemId
+      const problem = await Problem.query().select().where("id",problemId).first()
+      return res.status(200).json({ problem })
+    } catch (e) {
+      res.status(422).json({ error: e.message });
+    }
+  }),
+
+
   postProblem: router.post("/api/v1/problems/post", async (req, res) => {
     try {
       const data = {

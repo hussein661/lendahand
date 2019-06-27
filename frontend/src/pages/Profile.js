@@ -41,7 +41,6 @@ class Profile extends Component {
     getData(){
         const URL = PUBLIC_URL + API_PREFIX + "problems/myposts"
         checkRespone(URL,"get").then(r=>{
-            console.log(r)
             if(r.data){
                 this.setState({myPosts:r.data.myPosts})
             }

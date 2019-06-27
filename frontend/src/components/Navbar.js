@@ -118,7 +118,7 @@ class PrimarySearchAppBar extends React.Component {
   SignOut = () =>{
       localStorage.clear()
       this.handleMenuClose()
-      this.props.history.push("login")
+      this.props.history.push("/login")
   }
 
   handleMobileMenuOpen = event => {

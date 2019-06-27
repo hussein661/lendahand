@@ -5,7 +5,7 @@ import {Button,Link} from './common'
 const PostCard = ({post,deletePost,history}) => {
     return (
         <div>
-                <Link onClick={_=>history.push('/post/' + post.id)}>
+                <Link onClick={_=>history.push('/problem/' + post.id)}>
                     {post.title}
                 </Link>
                 <div>

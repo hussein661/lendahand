@@ -7,6 +7,7 @@ import FeedBack from "./pages/FeedBack";
 import Profile from "./pages/Profile";
 import LogIn from "./pages/LogIn";
 import Register from "./pages/Register";
+import PostView from "./components/PostView";
 
 const isLoggedIn = () => {
   const token = localStorage.getItem("API_TOKEN")
@@ -15,14 +16,17 @@ const isLoggedIn = () => {
   }
 }
 
-const MyRoute = ({ path ,component: Component,publicRoute}) => {
+const MyRoute = (MyRouteProps) => {
+  const Component = MyRouteProps.component
+  const publicRoute = MyRouteProps.publicRoute ? true : false
+  const params = MyRouteProps.computedMatch.params
   return (
       <div>
       <Navbar isLoggedIn={isLoggedIn}/>
       {(isLoggedIn() || publicRoute) ? 
-      <Route  render={props => <Component {...props} />} />
+      <Route  render={originalRouteProps => <Component {...originalRouteProps} params={params} />} />
       :
-      <Route  render={props => <LogIn {...props} />} />
+      <Route  render={originalRouteProps => <LogIn {...originalRouteProps} />} />
     }
       </div>
   );
@@ -34,13 +38,13 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <MyRoute exact path="/" component={Home} publicRoute />
+        <MyRoute exact path="/" component={Home} publicRoute  />
         <MyRoute exact path="/postAProblem" component={PostAProblem} />
         <MyRoute exact path="/feedBack" component={FeedBack} />
         <MyRoute exact path="/profile" component={Profile} />
         <MyRoute exact path="/LogIn" component={LogIn} publicRoute/>
         <MyRoute exact path="/Register" component={Register} publicRoute />
-
+        <MyRoute exact path="/problem/:problemId" component={PostView} />
       </Switch>
     </BrowserRouter>
   );
