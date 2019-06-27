@@ -1,7 +1,6 @@
 const { Model } = require('objection');
 const moment = require('moment');
 
-const today = moment().format("YYYY-MM-DD-hh:mm:ss");
 
 class Problem extends Model {
     
@@ -9,12 +8,13 @@ class Problem extends Model {
         return "problems";
     }
     
-        $beforeInsert() {
+    $beforeInsert() {
+        const today = new Date()
             this.created_at = today;
             this.updated_at = today;
         }
-    
         $beforeUpdate() {
+            const today = new Date()    
             this.updated_at = today;
         } 
 }

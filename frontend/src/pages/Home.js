@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import {API_PREFIX,PUBLIC_URL} from '../utils/Dirs'
 import checkRespone from '../utils/checkResponse'
+import PostsList from '../components/PostsList';
+import SideBar from '../components/SideBar';
+import Widgets from '../components/Widgets';
+import Post from '../components/Post';
 
 
 class Home extends Component {
@@ -23,11 +27,16 @@ class Home extends Component {
         })
     }
     render() {
+        const {allposts} = this.state
         return (
-            <div>
-                {this.state.allposts.map(post=>
-                    <ul key={post.id}>{post.title}</ul>
+            <div className="HomePageLayout">
+                <SideBar />
+                <div className="card-deck">
+            {allposts.map(post =>                
+                <Post post={post} />
                 )}
+                </div>
+                <Widgets />
             </div>
         )
             }
