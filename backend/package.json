@@ -1,15 +1,15 @@
 {
-  "name": "api",
+  "name": "lendahand",
   "version": "1.0.0",
   "description": "API for Appointment Management System.",
   "main": "./public/server.js",
   "scripts": {
-    "start": "nodemon ./app/public/server.js"
+    "start": "nodemon ./public/server.js"
   },
   "author": "Monty Holdings",
   "dependencies": {
     "@types/node": "^10.12.18",
-    "bcrypt": "^3.0.3",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "connect-busboy": "^0.0.2",
     "dotenv": "^6.2.0",

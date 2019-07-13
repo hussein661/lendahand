@@ -3,10 +3,9 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import {DropzoneArea} from 'material-ui-dropzone'
 import {API_PREFIX,PUBLIC_URL} from '../utils/Dirs'
-import checkRespone from '../utils/checkResponse'
+import checkResponse from '../utils/checkResponse'
 import { Button } from '../components/common';
 import Header from '../components/common/Header';
-
 const styles = theme => ({
   container: {
     display: 'flex',
@@ -35,32 +34,38 @@ class PostAProblem extends Component {
     description:"some desc",
     image:"myimg",
     files: []
-
-
+    
+    
   }
+      handleInputChange = (e) =>{
+        this.setState({[e.target.name]:e.target.value})
+        console.log(this.state)
+      }
+
 
   handleFileChange(files){
     this.setState({
-      files: files
+      files
     });
   }
-  handleInputChange = (e) =>{
-    this.setState({[e.target.name]:e.target.value})
-    console.log(this.state)
-  }
+  
+  postProblem = e =>{
+    e.preventDefault()
+    const user_id = localStorage.getItem("user_id")
+   const formData = new FormData()
 
- postProblem = e =>{
-   e.preventDefault()
-   const data = {
-     title:this.state.title,
-     needed_amount:this.state.amount,
-     description:this.state.description,
-     user_id:localStorage.getItem("user_id")
+   for(var x = 0; x<this.state.files.length; x++) {
+       formData.append('files', this.state.files[x])
    }
+
+   formData.append('title',this.state.title)
+   formData.append('needed_amount',this.state.amount)
+   formData.append('description',this.state.description)
+   formData.append('user_id',user_id)
     const URL = PUBLIC_URL + API_PREFIX + "problems/post"
-    checkRespone(URL,"post",data).then(r=>{
+    checkResponse(URL,"post",formData).then(r=>{
       if(r.data){
-        alert("post created by " + data.user_id)
+        alert("post created by " + user_id)
       }if(r.response){
         console.log(r.response.data)
       }
@@ -69,9 +74,7 @@ class PostAProblem extends Component {
  }
 
 
-
   render() {
-    
     const { classes } = this.props;
       return (
         <form  noValidate autoComplete="off" style={{background:"rgba(255,255,255,0.5)"}} onSubmit={this.postProblem}>

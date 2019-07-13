@@ -1,6 +1,7 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const HashUtil = function(string, hash) {
+
     this.saltRounds = 10;
     this.string = string;
     this.hashed = hash;

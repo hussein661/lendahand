@@ -26,6 +26,7 @@ class Home extends Component {
             }
         })
     }
+
     render() {
         const {allposts} = this.state
         return (
@@ -33,7 +34,7 @@ class Home extends Component {
                 <SideBar />
                 <div className="card-deck">
             {allposts.map(post =>                
-                <Post post={post} />
+                <Post post={post} history={this.props.history} />
                 )}
                 </div>
                 <Widgets />

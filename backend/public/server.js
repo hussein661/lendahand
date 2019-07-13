@@ -11,11 +11,12 @@
   const logger = require('knex-logger');
   const userController = require('../controllers/users')
   const problemController = require('../controllers/problems')
+  const path = require('path')
   // ports, app initialization
   const PORT = process.env.PORT || 5000;
   const app = express();
   Model.knex(knex);
-  
+  app.use(express.static(path.resolve('./public')));
   // middlewares
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);

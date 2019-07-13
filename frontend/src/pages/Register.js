@@ -31,14 +31,17 @@ class Register extends Component {
       }
     
     const URL = PUBLIC_URL+ API_PREFIX + "register"
-    console.log(URL)
     checkResponse(URL,"post",{first_name,last_name,email,password})
     .then(result => {
       if(result.response){
        return this.setState({err:result.response.data.error})
         
       }
+      console.log(result)
       return this.props.history.push("/login")
+    })
+    .catch(error=>{
+      return alert(error)
     })
 
   };
