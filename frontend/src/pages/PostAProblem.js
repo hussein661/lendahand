@@ -4,8 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import {DropzoneArea} from 'material-ui-dropzone'
 import {API_PREFIX,PUBLIC_URL} from '../utils/Dirs'
 import checkResponse from '../utils/checkResponse'
-import { Button } from '../components/common';
-import Header from '../components/common/Header';
+import { Button,Header } from '../components/common';
 const styles = theme => ({
   container: {
     display: 'flex',
@@ -39,7 +38,6 @@ class PostAProblem extends Component {
   }
       handleInputChange = (e) =>{
         this.setState({[e.target.name]:e.target.value})
-        console.log(this.state)
       }
 
 

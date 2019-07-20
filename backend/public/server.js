@@ -11,6 +11,7 @@
   const logger = require('knex-logger');
   const userController = require('../controllers/users')
   const problemController = require('../controllers/problems')
+  const donationsController = require('../controllers/donations')
   const path = require('path')
   // ports, app initialization
   const PORT = process.env.PORT || 5000;
@@ -46,3 +47,4 @@
 
   app.use(userController.getAllUsers)
   app.use(problemController.postProblem)
+  app.use(donationsController.donate)

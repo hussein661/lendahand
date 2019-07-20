@@ -72,7 +72,7 @@ module.exports = {
       if (user) {
         const crypt = new HashUtil(password, user.password);
         if (crypt.verify()) {
-          var token = jwt.sign({email,id:user.id}, "process.env.ACCESS_KEY", { algorithm: 'HS256', expiresIn: 6000})
+          var token = jwt.sign({email,id:user.id}, "process.env.ACCESS_KEY", { algorithm: 'HS256', expiresIn: 60000000})
           return res.status(200).json({token,user_id:user.id});
         }
       }

@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import {API_PREFIX,PUBLIC_URL} from '../utils/Dirs'
 import checkRespone from '../utils/checkResponse'
 import $ from "jquery"
-import { Button, Link } from '../components/common';
-import Header from '../components/common/Header';
+import { Button, Link,Header } from '../components/common';
 import PostCard from '../components/PostCard';
 
 
@@ -77,7 +76,6 @@ class Profile extends Component {
         }
         checkRespone(URL,"put",data)
         .then(r=>{
-            console.log(r)
             if(r.data){
                 alert("updated")
                 this.getData()
@@ -115,9 +113,9 @@ class Profile extends Component {
                         }
                     this.setState({myPosts})
                     })
-                  return  console.log(r.data)
+                  return  
                 }
-                return console.log(r.response.data)
+                return 
             }
          )
     }

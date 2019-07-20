@@ -20,7 +20,6 @@ class Home extends Component {
     getData(){
         const URL = PUBLIC_URL + API_PREFIX + "problems/allposts"
         checkRespone(URL,"get").then(r=>{
-            console.log(r.data)
             if(r.data){
                 this.setState({allposts:r.data.allposts})
             }

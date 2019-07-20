@@ -1,42 +1,96 @@
 body {
-	background-color:#e7e7e7;
+  background-color: #e7e7e7;
 }
 
 .navbar {
-	background: blue;
-	
+  background: blue;
 }
 
 .textField {
-	width: 100%;
-	margin: 15;
-	font-size: 18;
-
+  width: 100%;
+  margin: 15;
+  font-size: 18;
 }
 
 .HomePageLayout {
-	display: grid;
-	grid-template-columns: 1fr 4fr 1fr;
-	grid-gap: 5px;
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-gap: 5px;
+  margin: 20px
 }
 .card-deck {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-	grid-gap: 3px
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 3px;
 }
 
-.HomePageLayout>div {
-	background: red
+.HomePageLayout > div {
 }
-
 
 .formContainer {
-	margin: 0 auto;
-	margin-top:20px; 
-	text-align: center;
-	border:1px solid silver;
-	box-shadow: 1px 1px 1px silver;
-	padding:21px;
-	background-color:white;
+  margin: 0 auto;
+  margin-top: 20px;
+  text-align: center;
+  border: 1px solid silver;
+  box-shadow: 1px 1px 1px silver;
+  padding: 21px;
+  width: 50%;
+  background-color: white;
+}
+.card-body {
+  margin: 0;
+  padding: 0;
+}
+.cardHeader {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  margin: 5px;
+  padding: 0px;
+}
+.cardHeader > div {
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+}
+.card{
+	padding: 5px;
+	width: 100%;
+}
+.cardHeader > div > p {
+  margin-left: 3px;
+  margin-top: 6px;
+  margin-bottom: 0px;
+  padding: 0px;
+  font-size: 20px;
+	text-align: left;
+}
+.cardHeader > div > img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  margin: 0px;
+  padding: 0px;
+}
+.donatePost {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 50% 50%;
+}
 
+.galleryPost {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 7px;
+  border-right: 1px solid black;
+  padding: 10px;
+}
+.imageDiv > img {
+  width: 100%;
+  height: 100%;
+}
+@media screen and (max-width: 700px) {
+  .formContainer {
+    width: 100%;
+    /* margin: 10px; */
+  }
 }

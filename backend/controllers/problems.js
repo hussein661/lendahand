@@ -84,7 +84,10 @@ module.exports = {
   allposts: router.get("/api/v1/problems/allposts", async (req, res) => {
     try {
       let allposts = [];
-      let posts = await Problem.query().select();
+      let posts = await Problem.query().
+       select("problems.*","users.first_name","users.last_name","users.mobile","users.email")
+      .join("users","problems.user_id","users.id")
+      console.log(posts)
       for (var i = 0; i <= posts.length - 1; i++) {
         let id = posts[i].id;
         let Pimages = await ProblemImages.query()
@@ -99,7 +102,6 @@ module.exports = {
           images
         });
       }
-      console.log(allposts);
       return res.status(200).json({ allposts });
     } catch (e) {
       console.log(e);

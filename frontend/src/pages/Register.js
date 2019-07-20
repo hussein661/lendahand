@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import {PUBLIC_URL,API_PREFIX} from '../utils/Dirs'
 import checkResponse from '../utils/checkResponse'
 import TextField from '@material-ui/core/TextField';
-import {Button, Link} from "../components/common";
-import Header from "../components/common/Header";
+import {Button, Link,Header} from "../components/common";
 
 class Register extends Component {
   state = {};
@@ -37,7 +36,6 @@ class Register extends Component {
        return this.setState({err:result.response.data.error})
         
       }
-      console.log(result)
       return this.props.history.push("/login")
     })
     .catch(error=>{
