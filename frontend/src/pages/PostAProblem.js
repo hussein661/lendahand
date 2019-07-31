@@ -5,6 +5,7 @@ import {DropzoneArea} from 'material-ui-dropzone'
 import {API_PREFIX,PUBLIC_URL} from '../utils/Dirs'
 import checkResponse from '../utils/checkResponse'
 import { Button,Header } from '../components/common';
+
 const styles = theme => ({
   container: {
     display: 'flex',
@@ -87,11 +88,8 @@ class PostAProblem extends Component {
             margin="normal"
             name="title"
             variant="outlined"
-            
-            // multiline
             style={{background:"white",width:"80%"}}
             
-            // fullWidth
             />
         <TextField
           id="outlined-password-input"
@@ -107,7 +105,7 @@ class PostAProblem extends Component {
           rowsMax="4"
 
         />
-                <TextField
+          <TextField
           id="outlined-password-input"
           label="Amount"
           className="InputField"

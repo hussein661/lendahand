@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {API_PREFIX,PUBLIC_URL} from '../utils/Dirs'
 import checkRespone from '../utils/checkResponse'
-import PostsList from '../components/PostsList';
 import SideBar from '../components/SideBar';
 import Widgets from '../components/Widgets';
 import Post from '../components/Post';

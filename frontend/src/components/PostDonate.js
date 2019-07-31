@@ -3,11 +3,13 @@ import TextField from "@material-ui/core/TextField";
 import {Button,Header} from './common';
 import {PUBLIC_URL,API_PREFIX} from '../utils/Dirs'
 import checkResponse from "../utils/checkResponse";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 var validator = require('validator')
 
 class PostDonate extends Component {
   state = {
-    calledPost: {images:[]}
+    calledPost: {images:[]},
+    donated:false
   };
   componentWillMount() {
     this.setState({ calledPost: this.props.location.state });
@@ -30,29 +32,29 @@ class PostDonate extends Component {
   }
 
   validate = () =>{
-      this.setState({err:'',credit_card_error:false,amount_error:false,cvv_error:false,expiry_date_error:false})
-      let re_expiry_date = /\b(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})\b/
-      const {holder_name,credit_card,cvv,expiry_date,amount} = this.state
-        if(!holder_name){
-            this.setState({err:'incorrect holder name format'})
-            return false
-        }
-      if(credit_card.length !== 12){
-          this.setState({err:'credit card is not valid',credit_card_error:true})
-          return false
-      }
-      if(!validator.isNumeric(amount)){
-          this.setState({err:"amount is ambigious",amount_error:true})
-          return false
-      }
-      if(!validator.isNumeric(cvv) || cvv.length !== 3){
-          this.setState({err:"cvv is not valid",cvv_error:true})
-              return false
-      }
-      if(!re_expiry_date.test(expiry_date)){
-          this.setState({err:"expiry date is not valid",expiry_date_error:true})
-          return false
-      }
+      // this.setState({err:'',credit_card_error:false,amount_error:false,cvv_error:false,expiry_date_error:false})
+      // let re_expiry_date = /\b(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})\b/
+      // const {holder_name,credit_card,cvv,expiry_date,amount} = this.state
+      //   if(!holder_name){
+      //       this.setState({err:'incorrect holder name format'})
+      //       return false
+      //   }
+      // if(credit_card.length !== 12){
+      //     this.setState({err:'credit card is not valid',credit_card_error:true})
+      //     return false
+      // }
+      // if(!validator.isNumeric(amount)){
+      //     this.setState({err:"amount is ambigious",amount_error:true})
+      //     return false
+      // }
+      // if(!validator.isNumeric(cvv) || cvv.length !== 3){
+      //     this.setState({err:"cvv is not valid",cvv_error:true})
+      //         return false
+      // }
+      // if(!re_expiry_date.test(expiry_date)){
+      //     this.setState({err:"expiry date is not valid",expiry_date_error:true})
+      //     return false
+      // }
       return true
   }
 
@@ -68,8 +70,13 @@ class PostDonate extends Component {
           }
           const URL =  PUBLIC_URL + API_PREFIX + 'donate'
         checkResponse(URL,"POST",data).then(result=>{
-          alert("donation success, Thank you")
-          return this.props.history.push("/")
+          NotificationManager.success('your donation has been sent, Thank you')
+          setTimeout(() => {
+            NotificationManager.info('Redirecting...')
+          }, 1500);
+          this.setState({donated:true})
+          setTimeout(_=>this.props.history.push("/"), 3000);
+          // return this.props.history.push("/")
         }
             
         )
@@ -108,7 +115,6 @@ class PostDonate extends Component {
                 name="holder_name"
                 variant="outlined"
                 error={this.state.name_card_error}
-                required
               />
               <TextField
                 className="textField"
@@ -119,7 +125,6 @@ class PostDonate extends Component {
                 name="credit_card"
                 variant="outlined"
                 error={this.state.credit_card_error}
-                required
               />
               <TextField
                 style={styles.smallInput}
@@ -130,7 +135,6 @@ class PostDonate extends Component {
                 name="cvv"
                 error={this.state.cvv_error}
                 variant="outlined"
-                required
               />
               <TextField
                 style={styles.smallInput}
@@ -141,11 +145,9 @@ class PostDonate extends Component {
                 placeholder="03/2020"
                 name="expiry_date"
                 variant="outlined"
-                required
               />
               <TextField
                 className="textField"
-                required
                 error={this.state.amount_error}
                 name="amount"
                 onChange={e => this.handleChange(e)}
@@ -153,10 +155,12 @@ class PostDonate extends Component {
                 margin="dense"
                 variant="outlined"
               />
-              <Button type="submit">Donate now</Button>
+              <Button type="submit" disabled={this.state.donated}>Donate now</Button>
             </form>
           </div>
         </div>
+        <NotificationContainer/>
+
       </div>
     );
   }

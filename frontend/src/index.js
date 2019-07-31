@@ -4,6 +4,7 @@ import Routes from './Routes';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../src/styles/style.css'
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import 'react-notifications/lib/notifications.css';
 
 const App = () => (
     <Routes />

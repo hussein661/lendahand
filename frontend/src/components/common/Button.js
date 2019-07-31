@@ -18,7 +18,7 @@ const Button = (props) => {
         }
     }
     return (
-        <button  style={styles.buttonStyle} type={props.type} onClick={props.onClick}>
+        <button style={styles.buttonStyle} type={props.type} onClick={props.onClick} disabled={props.disabled}>
             {props.children}
         </button>
     );

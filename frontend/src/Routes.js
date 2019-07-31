@@ -7,7 +7,7 @@ import FeedBack from "./pages/FeedBack";
 import Profile from "./pages/Profile";
 import LogIn from "./pages/LogIn";
 import Register from "./pages/Register";
-import PostView from "./components/PostView";
+import PostEdit from "./components/PostEdit";
 import PostDonate from "./components/PostDonate";
 
 const isLoggedIn = () => {
@@ -45,7 +45,7 @@ const Routes = () => {
         <MyRoute exact path="/profile" component={Profile} />
         <MyRoute exact path="/LogIn" component={LogIn} publicRoute/>
         <MyRoute exact path="/Register" component={Register} publicRoute />
-        <MyRoute exact path="/problem/:problemId" component={PostView} />
+        <MyRoute exact path="/problem/:problemId" component={PostEdit} />
         <MyRoute exact path="/problem/donate/:problemId" component={PostDonate} />
 
       </Switch>
