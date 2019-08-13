@@ -33,7 +33,8 @@ class PostAProblem extends Component {
     amount:5,
     description:"some desc",
     image:"myimg",
-    files: []
+    files: [],
+    working:false
     
     
   }
@@ -49,6 +50,7 @@ class PostAProblem extends Component {
   }
   
   postProblem = e =>{
+    this.setState({working:true})
     e.preventDefault()
     const user_id = localStorage.getItem("user_id")
    const formData = new FormData()
@@ -63,6 +65,7 @@ class PostAProblem extends Component {
    formData.append('user_id',user_id)
     const URL = PUBLIC_URL + API_PREFIX + "problems/post"
     checkResponse(URL,"post",formData).then(r=>{
+      this.setState({working:false})
       if(r.data){
         alert("post created by " + user_id)
       }if(r.response){
@@ -124,8 +127,8 @@ class PostAProblem extends Component {
         filesLimit={5}
         />
         <br/>
-        <Button type="submit">
-        Post your problem
+        <Button type="submit" opacity={this.state.working ? 0.5 :1} disabled={this.state.working}>
+        {this.state.working ? 'Posting...' : 'Post your problem' }
       </Button>
             </div>
         </form>

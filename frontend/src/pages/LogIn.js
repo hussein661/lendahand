@@ -37,7 +37,6 @@ class LogIn extends Component {
       }
     
     const URL = PUBLIC_URL + API_PREFIX + "login"
-    console.log(URL)
     checkResponse(URL,"post",{email,password})
     .then(result => {
       if(result.response){

@@ -13,21 +13,29 @@ class Post extends Component {
     if(post.recieved_amount >= post.needed_amount){
       aquired=true
     }
+    let src = ''
+    console.log(displayImage)
+    if(!displayImage){
+      src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png'
+    }else {
+      src = `${PUBLIC_URL}/` + displayImage 
+    }
     return (
       <div className="card">
                   <div className="cardHeader"> 
             <div>
               <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" />
             </div>
-            <div>
+            <div style={{cursor:'pointer'}} onClick={_=>this.props.history.push('./user/' + post.user_id)}>
               <p>
                 {post.first_name} {post.last_name}
               </p>
             </div>
           </div>
         <img
+          onClick={_=>this.props.history.push(`/problem/${post.id}`)}
           className="card-img-top"
-          src={`${PUBLIC_URL}/` + displayImage}
+          src={src}
           alt="post image"
           style={{height:"160px"}}
         />

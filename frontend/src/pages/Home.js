@@ -28,6 +28,10 @@ class Home extends Component {
     render() {
         const {allposts} = this.state
         return (
+            <div>
+                <div className="main_header">
+                    <h1>Welcome to lend a hand, powered by square</h1>
+                </div>
             <div className="HomePageLayout">
                 <SideBar />
                 <div className="card-deck">
@@ -35,8 +39,9 @@ class Home extends Component {
                 <Post post={post} history={this.props.history} />
                 )}
                 </div>
-                <Widgets />
+                <Widgets history={this.props.history} />
             </div>
+                </div>
         )
             }
 }

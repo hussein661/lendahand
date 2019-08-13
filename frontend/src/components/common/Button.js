@@ -3,6 +3,7 @@ import React from 'react';
 const Button = (props) => {
     const styles = {
         buttonStyle:{
+            opacity:props.opacity || 1,
             fontWeight:420,
             width:props.width || '100%',
             borderRadius:4,

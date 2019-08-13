@@ -42,7 +42,7 @@ const Routes = () => {
         <MyRoute exact path="/" component={Home} publicRoute  />
         <MyRoute exact path="/postAProblem" component={PostAProblem} />
         <MyRoute exact path="/feedBack" component={FeedBack} />
-        <MyRoute exact path="/profile" component={Profile} />
+        <MyRoute exact path="/user/:user_id" component={Profile} />
         <MyRoute exact path="/LogIn" component={LogIn} publicRoute/>
         <MyRoute exact path="/Register" component={Register} publicRoute />
         <MyRoute exact path="/problem/:problemId" component={PostEdit} />

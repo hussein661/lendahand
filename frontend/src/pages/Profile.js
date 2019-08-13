@@ -4,6 +4,7 @@ import checkRespone from '../utils/checkResponse'
 import $ from "jquery"
 import { Button, Link,Header } from '../components/common';
 import PostCard from '../components/PostCard';
+import ProfileLayout from './ProfileLayout'
 
 
 
@@ -21,14 +22,12 @@ class Profile extends Component {
 
 
     componentDidMount(){
-        this.getme()
+        this.getUser()
         this.getData()
     }
 
-
-
-    getme(){
-        const URL = PUBLIC_URL + API_PREFIX + "users/getone"
+    getUser(){
+        const URL = PUBLIC_URL + API_PREFIX + "users/getone/" + this.props.params.user_id
         checkRespone(URL,"get").then(r=>{
             if(r.data){
                 this.setState({user:r.data.user})
@@ -38,7 +37,7 @@ class Profile extends Component {
 
 
     getData(){
-        const URL = PUBLIC_URL + API_PREFIX + "problems/myposts"
+        const URL = PUBLIC_URL + API_PREFIX + "problems/myposts/" + this.props.params.user_id
         checkRespone(URL,"get").then(r=>{
             if(r.data){
                 this.setState({myPosts:r.data.myPosts})
@@ -119,19 +118,13 @@ class Profile extends Component {
             }
          )
     }
-
-
     render() {
         return (
             <div>
               <Header>
-                  welcome {this.state.user.first_name}
+                  {/* welcome {this.state.user.first_name} */}
                   </Header> 
-                      {this.state.myPosts.map(post=>
-                  <div className="formContainer">
-                        <PostCard post={post} deletePost={this.deletePost} history={this.props.history}/>
-                  </div>
-                        )}
+                        <ProfileLayout profile={{...this.state}} history={this.props.history}/>
             </div>
         );
     }

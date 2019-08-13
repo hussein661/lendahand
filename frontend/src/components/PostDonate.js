@@ -9,7 +9,7 @@ var validator = require('validator')
 class PostDonate extends Component {
   state = {
     calledPost: {images:[]},
-    donated:false
+    donated:false,
   };
   componentWillMount() {
     this.setState({ calledPost: this.props.location.state });
@@ -59,6 +59,7 @@ class PostDonate extends Component {
   }
 
   donate = e=>{
+    this.setState({working:true})
       e.preventDefault()
       if(this.validate()){
           const data = {
@@ -70,6 +71,7 @@ class PostDonate extends Component {
           }
           const URL =  PUBLIC_URL + API_PREFIX + 'donate'
         checkResponse(URL,"POST",data).then(result=>{
+          this.setState({working:false})
           NotificationManager.success('your donation has been sent, Thank you')
           setTimeout(() => {
             NotificationManager.info('Redirecting...')
@@ -155,7 +157,7 @@ class PostDonate extends Component {
                 margin="dense"
                 variant="outlined"
               />
-              <Button type="submit" disabled={this.state.donated}>Donate now</Button>
+              <Button type="submit" opacity={this.state.working ? 0.5 : 1} disabled={this.state.donated}>{this.state.working ? 'Working...' : 'Donate now'}</Button>
             </form>
           </div>
         </div>
